@@ -95,7 +95,7 @@ else
 			}
 			
 			// check that receiver_email is your Primary PayPal email
-			if($receiver_email == 'sales@asiandinnerclub.com')
+			if($receiver_email == 'info@asiandinnerclub.com')
 			{
 				$validated[] = 1;
 			}
@@ -152,25 +152,25 @@ else
 						$femalequantity = $roweve['MaxFemaleQuantity'] - $quantity;
 						if($femalequantity <= 5 && $femalequantity > 0)
 						{
-							$to = 'sales@asiandinnerclub.com';
+							$to = 'info@asiandinnerclub.com';
 							$subject = "Female Tickets Alert - $ticket";
 							$body = "This is an auto alert:\r\n";
 							$body .= "\r\nFemale Tickets for $ticket has reached 5 or less.\r\n";
 							$body .= "\r\nPlease keep checking on the events database to see the ticket status.\r\n";
 							$body .= "\r\nThanks\nAuto Service\nAsian Dinner Club\r\n";
-							$headers .= "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
+							$headers .= "From: Asian Dinner Club Auto Service <autoservice@asiandinnerclub.com> \r\n";
 							mail($to, $subject, $body, $headers);
 						}
 
 						if($femalequantity == 0)
 						{
-							$to = 'sales@asiandinnerclub.com';
+							$to = 'info@asiandinnerclub.com';
 							$subject = "Female Tickets Alert - $ticket";
 							$body = "This is an auto alert:\r\n";
 							$body .= "\r\nFemale Tickets for $ticket has SOLD OUT!\r\n";
 							$body .= "\r\nPlease change the ticket status on the events database asap.\r\n";
 							$body .= "\r\nThanks\nAuto Service\nAsian Dinner Club\r\n";
-							$headers .= "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
+							$headers .= "From: Asian Dinner Club Auto Service <autoservice@asiandinnerclub.com> \r\n";
 							mail($to, $subject, $body, $headers);
 						
 							if($roweve['MaxMaleQuantity'] == 0)
@@ -196,25 +196,25 @@ else
 						$malequantity = $roweve['MaxMaleQuantity'] - $quantity;
 						if($malequantity <= 5 && $malequantity > 0)
 						{
-							$to = 'sales@asiandinnerclub.com';
+							$to = 'info@asiandinnerclub.com';
 							$subject = "Male Tickets Alert - $ticket";
 							$body = "This is an auto alert:\r\n";
 							$body .= "\r\nMale Tickets for $ticket has reached 5 or less.\r\n";
 							$body .= "\r\nPlease keep checking on the events database to see the ticket status.\r\n";
 							$body .= "\r\nThanks\nAuto Service\nAsian Dinner Club\r\n";
-							$headers .= "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
+							$headers .= "From: Asian Dinner Club Auto Service <autoservice@asiandinnerclub.com> \r\n";
 							mail($to, $subject, $body, $headers);
 						}
 
 						if($malequantity == 0)
 						{
-							$to = 'sales@asiandinnerclub.com';
+							$to = 'info@asiandinnerclub.com';
 							$subject = "Male Tickets Alert - $ticket";
 							$body = "This is an auto alert:\r\n";
 							$body .= "\r\nMale Tickets for $ticket has SOLD OUT!\r\n";
 							$body .= "\r\nPlease change the ticket status on the events database asap.\r\n";
 							$body .= "\r\nThanks\nAuto Service\nAsian Dinner Club\r\n";
-							$headers .= "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
+							$headers .= "From: Asian Dinner Club Auto Service <autoservice@asiandinnerclub.com> \r\n";
 							mail($to, $subject, $body, $headers);
 						
 							if($roweve['MaxFemaleQuantity'] == 0)
@@ -292,5 +292,4 @@ else
 		}
 	}
 	fclose ($fp);
-}
-?>
+}?>

@@ -29,6 +29,61 @@ if(isset($_GET['delete']))
 }
 //DELETE SECTION ENDED
 
+//APPROVE MEMBER
+if(isset($_GET['approve']))
+{
+	$approveid = $_GET['approve'];
+	$query2 = "SELECT * FROM Members WHERE ID = '$approveid' AND Approved = 'No'";
+	$result2 = mysql_query($query2) or die(mysql_error());
+	if(mysql_num_rows($result2) == 0)
+	{
+		$row2 = mysql_fetch_array($result2);
+		
+		$query3 = "UPDATE Members SET Approved = 'Yes' WHERE ID = $approveid";
+		mysql_query($query3) or die(mysql_error());
+		//$to = $row2['EmailAddress'];
+		$to = 'sumita.biswas@gmail.com, info@asiandinnerclub.com';
+		$fname = $row2['FirstName'];
+		$subject = 'Membership to Asian Dinner Club';
+		$mess = "Dear $fname,<br>";
+		$mess .= "<br/>Thank you for contacting Asian Dinner Club. Your request to join us as a member has been successful.<br/>";
+		$mess .= "<br/>To book tickets please find below your member username and password:<br/>";
+		$mess .= "<br/>Username: member<br/>Password: monaco<br/>";
+		$mess .= "<br/>Our events get booked up quickly, booking early is advised.<br/>";
+		$mess .= "<br/>You can also book on behalf of friends, please email us their names.<br/>";
+		$mess .= "<br/>We hope to see you soon.<br/>";
+		$message = "<html><head></head><body><p>" . $mess . "</p>";
+		$message .= "<p>&nbsp;</p><p>Thanks,<br/><br/>From the Asian Dinner Club Team</p>";
+		$message .= "<p><img src='http://www.asiandinnerclub.com/images/logo.gif' alt='Asian Dinner Club' border='0' /></p>";
+		$message .= "<p>&nbsp;<p><p>&nbsp;</p><p><hr/></p><p style='font-size:9px; color:grey;'>Asian Connections Ltd | Registered Office: 145-157 St John Street, London, EC1V 4PW | ";
+		$message .= "Reg. in England &amp; Wales | Co No: 8595159</p></body></html>";
+		$headers = "MIME-Version: 1.0 \r\n";
+		$headers .= "Content-type: text/html; charset=iso-8859-1 \r\n";
+		$headers .= "From: Asian Dinner Club <info@asiandinnerclub.com> \r\n";
+
+		if(mail($to, $subject, $body, $headers))
+		{?>
+			<script>
+			alert("Thanks - Member '<?php echo $fullname;?> has been approved!");
+			top.opener.top.location.reload(true);
+			window.close();
+			</script>
+			<?php
+		} else {?>
+			<p><b>System Error</b></p><p>A system error has occurred. The email did not go through:<br />
+			<?php echo 'mailto:' . $addresses;?></p><p>Please manually email this address to approve the member by clicking on the individual link. Thanks</p>
+<?php	}
+	} else {?>
+		<script>
+		alert("Error - Member '<?php echo $fullname;?> has already been approved!");
+		top.opener.top.location.reload(true);
+		window.close();
+		</script>
+		<?php
+	}
+}
+//APPROVE MEMBER ENDED
+
 //AMEND MEMBER
 if(isset($_POST['Submit']))
 {
@@ -200,7 +255,21 @@ if(isset($_GET['edit']))
 	$dateyear = $arrdate[2];
 	$fore = $row3['Forename'];
 	$sur = $row3['Surname'];
-	$names = "$fore $sur";?>
+	$names = "$fore $sur";
+	
+	if('No' == $row3['Approved'])
+	{?>
+		<!--<p><input type='button' name='approved' value='Approved' style='cursor:pointer;' onclick="location.href='?approved=true';" /></p>-->
+		<table cellspacing='0' cellpadding='0' border='0'>
+			<tr>
+				<td><img src="../images/sumi_buttons_04.png" width="11" height="19" alt=""></td>
+				<td class='singlebutton'><a title='Approved' onclick="if(confirm('Are you sure you want to approve this contact: <?php echo $names;?>?')){location.href='?approve=<?php echo $editid;?>';}else{window.location.reload(false);}">Approve Member</a></td>
+				<td><img src="../images/sumi_buttons_06.png" width="11" height="19" alt=""></td>
+			</tr>
+		</table>
+		<br/>
+	<?php  
+	}?>
 	<!--<p><input type='button' name='delete' value='Delete Member' onclick="if(confirm('Are you sure you want to delete this contact: <?php echo $names;?>?')){location.href='?delete=<?php echo $editid;?>';}else{window.location.reload(false);}" /></p>-->
 	<table cellspacing='0' cellpadding='0' border='0'>
 		<tr>

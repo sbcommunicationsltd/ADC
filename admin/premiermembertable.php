@@ -60,7 +60,7 @@ if(isset($_GET['approved']))
 
 	$headers = "MIME-Version: 1.0 \r\n";
 	$headers .= "Content-type: text/html; charset=iso-8859-1 \r\n";
-	$headers .= "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
+	$headers .= "From: Asian Dinner Club <info@asiandinnerclub.com> \r\n";
 
 	if(mail($to, $subject, $body, $headers))
 	{
@@ -115,7 +115,7 @@ if(isset($_GET['renew']))
 
 	$headers = "MIME-Version: 1.0 \r\n";
 	$headers .= "Content-type: text/html; charset=iso-8859-1 \r\n";
-	$headers .= "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
+	$headers .= "From: Asian Dinner Club <info@asiandinnerclub.com> \r\n";
 
 	if(mail($to, $subject, $body, $headers))
 	{

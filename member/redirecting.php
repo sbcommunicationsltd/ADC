@@ -170,7 +170,7 @@ if($location != 'eternity')
 if($redirect == 1)
 {?>
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" name='paypal'>
-	<input type="hidden" name="business" value="sales@asiandinnerclub.com">
+	<input type="hidden" name="business" value="info@asiandinnerclub.com">
 	<input type='hidden' name='cmd' value='_xclick'>
 	<input type='hidden' name='amount' value="<?php echo $amount;?>">
 	<!--<input type='hidden' name='amount' value="0.01">-->

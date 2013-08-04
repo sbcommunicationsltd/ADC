@@ -19,7 +19,7 @@
 <li><a href="past_events.php" target="_self">PAST<br/>EVENTS</a></li>
 <li><a href="membership.php" target="_self">MEMBERSHIP</a></li>
 <!--<li><a href="premiermembership.php" target="_self">PREMIER<br/>MEMBERSHIP</a></li>-->
-<li><a href="londondinnerclub.php" target="_self">LONDON<br/>DINNER CLUB</a></li>
+<!--<li><a href="londondinnerclub.php" target="_self">LONDON<br/>DINNER CLUB</a></li>-->
 <!--<li><a href="matchmaking.php" target="_self">MATCH&nbsp;<sup style='color:white; font-size:8px; border:1px solid white; padding:1px;'>NEW</sup><br/><span style='padding-right:25px;'>MAKING</span></a></li>-->
 <li><a href="press.php" target="_self">PRESS</a></li>
 <!--<li><a href="eternitymembership.php" target="_self">ETERNITY&nbsp;<sup style='color:white; font-size:8px; border:1px solid white; padding:1px;'>NEW</sup><br/><span style='padding-right:25px;'>MEMBERSHIP</span></a></li>-->

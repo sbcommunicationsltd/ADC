@@ -329,7 +329,7 @@ session_start();?>
 										<table cellspacing='0' cellpadding='0' border='0'>
 											<tr>
 												<td><img src="images/sumi_buttons_04.png" width="11" height="19" alt=""></td>
-												<td class='singlebutton'><a title='Book Now' href="member/?<?php if($row['Member_Type'] == 'Premier'){echo "type=premier&";}?>eid=<?php echo $eid;?>">Book Here</a></td>
+												<td class='singlebutton'><a title='Book Now' href="member/index.php?<?php if($row['Member_Type'] == 'Premier'){echo "type=premier&";}?>eid=<?php echo $eid;?>">Book Here</a></td>
 												<td><img src="images/sumi_buttons_06.png" width="11" height="19" alt=""></td>
 												<td style='padding-left:1em;'><a href="<?php if($row['Member_Type'] == 'Standard'){ echo 'membership.php';} else {echo 'member/premier/register.php';}?>" class='join'>Not a <?php if($row['Member_Type'] == 'Premier'){echo "Premier ";}?>Member? Join here</td>
 											</tr>
@@ -364,6 +364,9 @@ session_start();?>
 			</div>
 			<p><hr/></p>
 <?php	}
+	} else {?>
+		<p height='450'><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></p>
+	<?php
 	}?>
 
 

@@ -31,77 +31,7 @@
 <?php session_start();
 include '../database/databaseconnect.php';
 
-if($_GET['approved'] == 'true')
-{
-	$query2 = "SELECT * FROM Members WHERE Approved = 'No'";
-	$result2 = mysql_query($query2) or die(mysql_error());
-	if(mysql_num_rows($result2) != 0)
-	{
-		$adds = array();
-		while($row2 = mysql_fetch_array($result2))
-		{
-			$to = $row2['EmailAddress'];
-			//$to = 'sumita.biswas@gmail.com';
-			$subject = 'Membership to Asian Dinner Club';
-			$body = "Dear Member,\n";
-			$body .= "\nThank you for contacting Asian Dinner Club.\n";
-			$body .= "\nTo book tickets please find below your member username and password:\n";
-			$body .= "\nUsername: member\nPassword: monaco\n";
-			$body .= "\nOur events do get booked up quickly as we have over 800 members in our Club, so if you can plan ahead, that would hopefully ensure you can attend the events.\n";
-			$body .= "\nIf you are booking on behalf of friends, please email us their names.\n";
-			$body .= "\nWe hope to see you soon.\n";
-			$body .= "\nThanks,\nAdrianna\n";
-			$body .= "\nAsian Dinner Club\nMembership Manager";
-			$headers = "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
-
-			if(!mail($to, $subject, $body, $headers))
-			{
-				$adds[] = $row2['EmailAddress'];
-			}
-		}
-
-		if(empty($adds))
-		{
-			echo '<p><b>Thank You!</b></p><p>All your members have been approved!</p>';
-		}
-		else
-		{
-			foreach($adds as $add)
-			{
-				$addresses .= '$add';
-			}?>
-			<p><b>System Error</b></p><p>A system error has occurred. The following emails did not go through:<br />
-			<?php echo 'mailto:' . $addresses;?></p><p>Please manually email these addresses to approve these members by clicking on the individual links. Thanks</p>
-<?php	}
-
-		$query3 = "UPDATE Members SET Approved = 'Yes' WHERE Approved = 'No'";
-		$result3 = mysql_query($query3) or die(mysql_error());
-	}
-}
-
 $query = "SELECT * FROM Members";
-$result2 = mysql_query($query) or die(mysql_error());
-$app = 'true';
-while($rows = mysql_fetch_array($result2))
-{
-	if($rows['Approved'] == 'No')
-	{
-		$app = 'false';
-	}
-}
-
-if($app == 'false')
-{?>
-	<!--<p><input type='button' name='approved' value='Approved' style='cursor:pointer;' onclick="location.href='?approved=true';" /></p>-->
-	<table cellspacing='0' cellpadding='0' border='0'>
-		<tr>
-			<td><img src="../images/sumi_buttons_04.png" width="11" height="19" alt=""></td>
-			<td class='singlebutton'><a title='Approved' href='?approved=true'>Approved</a></td>
-			<td><img src="../images/sumi_buttons_06.png" width="11" height="19" alt=""></td>
-		</tr>
-	</table>
-	<br/>
-<?php  }
 
 if($_POST['sorted']=='forename')
 {
@@ -185,8 +115,7 @@ if(mysql_num_rows($result) != 0)
 		$id = $row['ID'];
 		$counter++;
 		$background_color = ( $counter % 2 == 0 ) ? ('#e9e9e9') : ('#ffffff'); ?>
-		<tr class='table' bgcolor="<?php echo $background_color;?>" onmouseover="this.className='table tablehover'" onmouseout="this.className='table'" <?php if($row['Approved'] == 'No'){ echo "style='color:red;'"; } ?>>
-				<a style='text-decoration:none;' href="javascript:void(0)" onclick="window.open('memberamend.php?edit=<?php echo $id;?>', 'child', 'height=500,width=600,status=yes,resizable=yes,scrollbars=yes')">
+		<tr class='table' bgcolor="<?php echo $background_color;?>" onmouseover="this.className='table tablehover'" onmouseout="this.className='table'" <?php if($row['Approved'] == 'No'){ echo "style='color:red;'"; } ?> onclick="window.open('memberamend.php?edit=<?php echo $id;?>', 'child', 'height=500,width=600,status=yes,resizable=yes,scrollbars=yes')">
 				<td><?php if($row['Image_Path'] == ''){echo 'NO PHOTO AVAILABLE';}else{?><img src="../member/images/<?php echo $row['Image_Path'];?>" alt="<?php echo $row['Forename'];?>" border='0' height='50' /><?php }?></td>
 				<?php
 				foreach($fieldname as $field)
@@ -200,7 +129,6 @@ if(mysql_num_rows($result) != 0)
 						}?>><?php echo $row[$field];?></td>
 			<?php	}
 				} ?>
-				</a>
 			</tr>
   <?php	}
 }

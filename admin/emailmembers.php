@@ -89,7 +89,7 @@ if(!isset($_POST['Send']) || (isset($_POST['Send']) && !empty($failed)))
 	<tr>
 		<td colspan='3'>
 			<?php
-			$query = "SELECT EmailAddress FROM Members";
+			$query = "SELECT ForeName, EmailAddress FROM Members";
 			if(isset($_GET['email']))
 			{
 				$gen = $_GET['email'];
@@ -103,12 +103,13 @@ if(!isset($_POST['Send']) || (isset($_POST['Send']) && !empty($failed)))
 				}
 			}
 			$result = mysql_query($query) or die(mysql_error());
+			
+			$emails = array();
 			while($row = mysql_fetch_array($result))
 			{
-				$emails .= $row[0] . ',';
+				$emails[] = $row[0] . '#' . $row[1];
 			}
-			$emails = substr($emails, 0, -1);
-			?>
+			$emailsadd = serialize($emails);?>
 			<form method='post' name='send'>
 				<table width='100%' cellspacing='2' cellpadding='2' border='0'>
 					<tr>
@@ -134,7 +135,7 @@ if(!isset($_POST['Send']) || (isset($_POST['Send']) && !empty($failed)))
 							{
 								echo 'All Standard Members';
 							}?>
-							<input type='hidden' name='EmailAdd' value='<?php echo $emails;?>' />
+							<input type='hidden' name='EmailAdd' value='<?php echo $emailsadd;?>' />
 						</td>
 					</tr>
 					<tr>
@@ -174,12 +175,13 @@ if(!isset($_POST['Send']) || (isset($_POST['Send']) && !empty($failed)))
 }
 else
 {
-	$toemails = $_POST['EmailAdd'];
-	//$toemails = 'sumita.biswas@gmail.com,sumi@blueyonder.co.uk,sumita_biswas@hotmail.com';
-	$toemails2 = explode(',', $toemails);
-	foreach($toemails2 as $toe)
+	$failed = array();
+	$toemails = unserialize($_POST['EmailAdd']);
+	//$toemails = array('Sumita#sumita.biswas@gmail.com', 'Sumi#sumi@blueyonder.co.uk', 'SumiHotMail#sumita_biswas@hotmail.com', 'TestMail#info@asiandinnerclub.com');
+	foreach($toemails as $toe)
 	{
-		$to = $toe;
+		$toemail = explode('#', $toe);
+		$to = $toemail[1];
 		$subject = $_POST['Subject'];
 		if(strpos($subject, '\"') !== false)
 		{
@@ -189,9 +191,14 @@ else
 		if(strpos($subject, "\'") !== false)
 		{
 			$subject = str_replace("\'", "'", $subject);
-		}
+		} 
 
 		$mess = $_POST['Message'];
+		
+		if (strpos($mess, '[firstname]') !== false) {
+			$mess = str_replace("[firstname]", $toemail[0], $mess);
+		}
+		
 		if(strpos($mess, "\r\n") !== false)
 		{
 			$mess = str_replace("\r\n", '<br/>', $mess);
@@ -209,10 +216,14 @@ else
 
 		$message = "<html><head></head><body><p>" . $mess . "</p>";
 		$message .= "<p>&nbsp;</p><p>Best Wishes,<br/><br/>From the Asian Dinner Club Team</p>";
-		$message .= "<p><img src='http://www.asiandinnerclub.com/images/logo.gif' alt='Asian Dinner Club' border='0' /></p><p style='font-size:10px;'>We want to keep you up to date with everything that is happening at Asian Dinner Club, but you can click here to unsubscribe <a href='mailto:sales@asiandinnerclub.com'>sales@asiandinnerclub.com</a> if you no longer wish to receive information.Thank you.</p></body></html>";
+		$message .= "<p><img src='http://www.asiandinnerclub.com/images/logo.gif' alt='Asian Dinner Club' border='0' /></p>";
+		$message .= "<p style='font-size:10px;'>We want to keep you up to date with everything that is happening at Asian Dinner Club.";
+		$message .= "Click <a href='mailto:info@asiandinnerclub.com'>info@asiandinnerclub.com</a> to let us know if you wish to unsubscribe or cancel your membership with Asian Dinner Club. Thank you.</p>";
+		$message .= "<p>&nbsp;<p><p>&nbsp;</p><p><hr/></p><p style='font-size:9px; color:grey;'>Asian Connections Ltd | Registered Office: 145-157 St John Street, London, EC1V 4PW | ";
+		$message .= "Reg. in England &amp; Wales | Co No: 8595159</p></body></html>";
 		$headers = "MIME-Version: 1.0 \r\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1 \r\n";
-		$headers .= "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
+		$headers .= "From: Asian Dinner Club <info@asiandinnerclub.com> \r\n";
 
 		if(!mail($to, $subject, $message, $headers))
 		{

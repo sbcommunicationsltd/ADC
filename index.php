@@ -21,7 +21,7 @@ elseif(isset($_GET['cancel']))
 {
 	if($_GET['cancel'] == 'premier')
 	{?>
-		<script>alert('You have cancelled the payment for Premier Membership. Please contact sales@asiandinnerclub.com when you wish to pay.');
+		<script>alert('You have cancelled the payment for Premier Membership. Please contact info@asiandinnerclub.com when you wish to pay.');
 		location.href='../';
 		</script>
 	<?php
@@ -107,12 +107,12 @@ elseif(isset($_GET['cancel']))
 
 
 	<h1><img src="images/welcome.gif" alt="welcome" width="181" height="50"/></h1>
-  <p>The Asian Dinner Club hosts dinner parties for single Asian professionals who enjoy relaxing and socialising over outstanding food in some of London's finest restaurants.</p>
-    <p>Our events attract individuals aged between 24 - 42 years who lead hectic lives and work long hours, thereby finding it difficult to meet other like-minded Asians.
+  <p>The <b>Asian Dinner Club</b> hosts dinner parties for single Asian professionals who enjoy relaxing and socialising over outstanding food in some of London's finest restaurants.</p>
+    <p>Our events attract individuals aged 25+ who lead hectic lives and work long hours, thereby finding it difficult to meet other like-minded Asians.
 
-Each specially organised dinner party have a maximum of 20 Members, with an even mix of women and men. </p>
-	    <p>We also host monthly Networking Drinks at stylish bars in Mayfair, Kensington and the West End. We provide an excellent environment for our members to relax, socialise and network over informal drinks and meet other members. To join this unique Club, please go to <a style='text-decoration:none;' href="membership.php">Membership</a>. </p>
-	    <p>NOTE: Each registration is vetted and you will be contacted by one of our <a style='text-decoration:none;' href="team.php">Team</a> if your application is successful.<br/>
+Each specially organised dinner party has a maximum of 20 Members, with an even mix of men and women. </p>
+	    <p>We also host regular Networking Drinks at stylish bars. We provide luxurious environments for our members to relax, socialise and network over informal drinks. To join this unique Club, please go to <a style='text-decoration:none;' href="membership.php">Membership</a>. </p>
+	    <p>NOTE: Each registration is vetted and you will be contacted by one of our team if your application is successful.<br/>
   </p>
   <div>
     <table class='table' width='100%' style="border:1px solid #d0d3d5; background-color:transparent;" border="0" cellspacing="1" cellpadding="4" align='center'>
@@ -122,43 +122,33 @@ Each specially organised dinner party have a maximum of 20 Members, with an even
       	<tr>
         	<td class="title3">Date</td>
         	<td class="title3">Venue</td>
-			<!--<td class='title3'>City</td>-->
-			<td class='title3'>Religion</td>
         	<td class="title3">Event Type</td>
-			<td class='title3'>Age</td>
-			<td class='title3'>Membership</td>
-        	<td class="title3">Availability</td>
       	</tr>
-
       	<?php	$query = "SELECT * FROM Events WHERE Date >= CURDATE() ORDER BY Date ASC LIMIT 0,8";
       			$result = mysql_query($query) or die(mysql_error());
       			if(mysql_num_rows($result) != 0)
       			{
       				$counter = 0;
       				while($row = mysql_fetch_array($result))
-      				{
-      					$counter++;
+					{
+						$counter++;
 						$background_color = ( $counter % 2 == 0 ) ? ('#e9e9e9') : ('#ffffff');
 						$venue = addslashes($row['Venue']);
 						$date = date('D, d M', strtotime($row['Date']));?>
 						<a href='events.php#<?php echo $venue;?>'>
-	  					<tr class='table' bgcolor="<?php echo $background_color;?>" onmouseover="this.className='table tablehover'" onmouseout="this.className='table'" onclick="location.href='events.php#<?php echo $venue;?>';">
-        					<td style='white-space: nowrap;'><?php echo $date;?></td>
-        					<td><?php echo $venue;?></td>
-							<!--<td><?php echo $row['City'];?></td>-->
-							<td><?php echo $row['Religion'];?></td>
-        					<td><?php echo $row['Event_Type'];?></td>
-							<td><?php echo $row['Age'];?></td>
-							<td><?php echo $row['Member_Type'];?></td>
-        					<td><?php echo wordwrap($row['Availability'], 15, "<br />\n");?></td>
-      					</tr>
-      					</a>
-      					<?php
-      				}
+						<tr class='table' bgcolor="<?php echo $background_color;?>" onmouseover="this.className='table tablehover'" onmouseout="this.className='table'" onclick="location.href='events.php#<?php echo $venue;?>';">
+							<td style='white-space: nowrap;'><?php echo $date;?></td>
+							<td><?php echo $venue;?></td>
+							<td><?php echo $row['Event_Type'];?></td>
+						</tr>
+						</a>
+						<?php
+					}
       			}
       	?>
     </table>
   </div>
+  <p>For more information and additional events, please go to <a href='events.php'>Current Events</a></p>
 </div>
 
 <div id="contentcol2">

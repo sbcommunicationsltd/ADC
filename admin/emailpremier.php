@@ -210,10 +210,10 @@ else
 
 		$message = "<html><head></head><body><p>" . $mess . "</p>";
 		$message .= "<p>&nbsp;</p><p>Best Wishes,<br/<br/>From the Asian Dinner Club Team</p>";
-		$message .= "<p><img src='http://www.asiandinnerclub.com/images/logo.gif' alt='Asian Dinner Club' border='0' /></p><p style='font-size:10px;'>We want to keep you up to date with everything that is happening at Asian Dinner Club, but you can click here to unsubscribe <a href='mailto:sales@asiandinnerclub.com'>sales@asiandinnerclub.com</a> if you no longer wish to receive information.Thank you.</p></body></html>";
+		$message .= "<p><img src='http://www.asiandinnerclub.com/images/logo.gif' alt='Asian Dinner Club' border='0' /></p><p style='font-size:10px;'>We want to keep you up to date with everything that is happening at Asian Dinner Club, but you can click here to unsubscribe <a href='mailto:info@asiandinnerclub.com'>info@asiandinnerclub.com</a> if you no longer wish to receive information.Thank you.</p></body></html>";
 		$headers = "MIME-Version: 1.0 \r\n";
 		$headers .= "Content-type: text/html; charset=iso-8859-1 \r\n";
-		$headers .= "From: Asian Dinner Club <sales@asiandinnerclub.com> \r\n";
+		$headers .= "From: Asian Dinner Club <info@asiandinnerclub.com> \r\n";
 
 		if(!mail($to, $subject, $message, $headers))
 		{

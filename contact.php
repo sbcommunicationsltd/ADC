@@ -41,9 +41,7 @@
 	    <p><strong><span class="righthandpic"><img src="images/asian_dinner_1.jpg" alt="Asian Dinner Club contact" width="250" height="250" /></span></strong>
 	    <table width="296" height="59" border="0" cellpadding="0" cellspacing="0">
           <tr align="left" valign="top">
-            <td><strong>Email:</strong></td>
-            <td>&nbsp;</td>
-            <td><a href="mailto:info@asiandinnerclub.com">info@asiandinnerclub.com</a></td>
+            <td>For all enquiries please contact us via email at <a href="mailto:info@asiandinnerclub.com">info@asiandinnerclub.com</a></td>
           </tr>
         </table>
 	    <p> <br>

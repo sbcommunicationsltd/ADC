@@ -42,9 +42,10 @@
 	<div id="contentcol1">
 
 		<h1><img src="images/about_us.gif" alt="About Us" width="181" height="50"/></h1>
-	    <p><b>The Asian Dinner Club</b> was set up in 2008 as a way for like-minded Asian professionals to meet.</p>
-	    <p>There were a number of Asian &ldquo;dating events&rdquo; organised by different companies but these were generally poorly organised, in badly-lit venues in London</p>
-	    <p>Choosing the right venue is critical to a successful evening so members can relax and socialise. The Asian Dinner Club team have selected restaurants which are reasonably priced, to allow members to attend events regularly.</p>
+	    <p><b>The Asian Dinner Club</b> was set up in 2008 due to the increasing difficulty in meeting like-minded single Asian Professionals who work long hours and lead a typically hectic lifestyle.</p>
+	    <p>From hosting events in stylish venues in Mayfair, Kensington and the West End, the <b>Asian Dinner Club</b> is continually expanding to bring networking events to additional locations closer to the discerning and continually increasing membership base.</p>
+	    <p>Choosing the right venue is critical to a successful evening where members can relax and socialise. The <b>Asian Dinner Club</b> team carefully select regularlyvenues that provide outstanding food and drink as well as an elegant ambiance.</p>
+		<p><br/><br/><br/></p>
         <div><div></div>
 	  </div>
 </div>
