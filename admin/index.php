@@ -66,46 +66,23 @@ if(!isset($_SESSION['admin2_is_logged_in'])){
 	<h1><img src="../images/welcome.gif" alt="welcome" width="181" height="50"/></h1>
 <table width='80%' align='center' cellspacing='2' cellpadding='2' border='0' style='border:2px #99CCFF double; border-width:6px;'>
 <tr>
-	<th width='33%'><span onclick="location.href='membershipdatabase.php';"><input type='submit' name='members' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Standard Database</span></span></th>
-	<th width='33%'><span onclick="location.href='premiermemdatabase.php';"><input type='submit' name='premmem' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Premier Database</span></span></th>
-	<th width='33%'><span onclick="location.href='eventsdatabase.php';"><input type='submit' name='events' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Event Management</span></span></th>
+	<th width='50%'><span onclick="location.href='membershipdatabase.php';"><input type='submit' name='members' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Members Database</span></span></th>
+	<th width='50%'><span onclick="location.href='eventsdatabase.php';"><input type='submit' name='events' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Event Management</span></span></th>
 </tr>
 <tr>
-	<td colspan='3'>&nbsp;</td>
-</tr>
-<!--<tr>
-	<td colspan='3'>
-		<table width='100%'>
-			<tr>
-				<th width='50%'><span onclick="location.href='emailmembers.php';"><input type='submit' name='emailmembers' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Email Standard Members</span></span></th>
-				<th width='50%'><span onclick="location.href='emailpremier.php';"><input type='submit' name='emailpremier' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Email Premier Members</span></span></th>
-			</tr>
-		</table>
-	</td>
-</tr>-->
-<tr>
-	<!--<th width='33%'><span onclick="location.href='emailmembers.php';"><input type='submit' name='emailmembers' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Email Standard Members</span></span></th>-->
-	<th width='33%'><span onclick="<?php echo $admin2;?>"><input type='submit' name='emailmembers' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Email Standard Members</span></span></th>
-	<th width='33%'><span onclick="location.href='emailpremier.php';"><input type='submit' name='emailpremier' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Email Premier Members</span></span></th>
-	<th width='33%'><span onclick="location.href='pressdatabase.php';"><input type='submit' name='press' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Press Releases Database</span></span></th>
+	<td colspan='2'>&nbsp;</td>
 </tr>
 <tr>
-	<td colspan='3'>&nbsp;</td>
+	<th width='50%'><span onclick="<?php echo $admin2;?>"><input type='submit' name='emailmembers' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Email Standard Members</span></span></th>
+	<th width='50%'><span onclick="location.href='pressdatabase.php';"><input type='submit' name='press' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Press Releases Database</span></span></th>
 </tr>
 <tr>
-	<th width='33%'><span onclick="location.href='adcloves.php';"><input type='submit' name='adcloves' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>ADC Loves...</span></span></th>
-	<th width='33%'><span onclick="location.href='../Plogger/plog-admin/';"><input type='submit' name='gallery' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Photo Gallery</span></span></th>
-	<!--<th width='33%'><span onclick="location.href='eternityeventsdatabase.php';"><input type='submit' name='eternityevents' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Eternity Events</span></span></th>
-	<th width='33%'><span onclick="location.href='eternitymemdatabase.php';"><input type='submit' name='eternitymem' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Eternity Database</span></span></th>-->
-	<th>&nbsp;</th>
-</tr>
-<!--<tr>
-	<td colspan='3'>&nbsp;</td>
+	<td colspan='2'>&nbsp;</td>
 </tr>
 <tr>
-	<th width='33%'><span onclick="location.href='emaileternity.php';"><input type='submit' name='emaileternity' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>Email Eternity Members</span></span></th>
-	<th colspan='2'>&nbsp;</th>
-</tr>-->
+	<th width='50%'><span onclick="location.href='adcloves.php';"><input type='submit' name='adcloves' value='' class='adminbutton' /><br/><br/><span class='adminbutton'>ADC Loves...</span></span></th>
+	<th width='50%'>&nbsp;</th>
+</tr>
 </table>
 <p>&nbsp;</p>
 

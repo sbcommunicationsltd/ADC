@@ -282,7 +282,7 @@ include 'database/databaseconnect.php';
 				$headers = "From: Asian Dinner Club <info@asiandinnerclub.com> \r\n";
 				if(mail($to, $subject, $body, $headers))
 				{
-					echo '<p><b>Thank You!</b></p><p>We will contact you within 48hrs to discuss your membership application.</p>';
+					echo '<p><b>Thank You!</b></p><p>We will contact you within 48hrs to discuss your membership application.</p><p><hr/></p>';
 					$result2 = mysql_query($query2) or die(mysql_error());
 				}
 				else

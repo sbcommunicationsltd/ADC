@@ -33,17 +33,18 @@ if(isset($_GET['delete']))
 if(isset($_GET['approve']))
 {
 	$approveid = $_GET['approve'];
-	$query2 = "SELECT * FROM Members WHERE ID = '$approveid' AND Approved = 'No'";
+	$query2 = "SELECT * FROM Members WHERE ID = '$approveid'";
 	$result2 = mysql_query($query2) or die(mysql_error());
-	if(mysql_num_rows($result2) == 0)
-	{
-		$row2 = mysql_fetch_array($result2);
-		
+	$row2 = mysql_fetch_array($result2);
+	$fname = $row2['ForeName'];
+	$sname = $row2['Surname'];
+	$fullname = "$fname $sname";
+	if('No' == $row2['Approved'])
+	{	
 		$query3 = "UPDATE Members SET Approved = 'Yes' WHERE ID = $approveid";
 		mysql_query($query3) or die(mysql_error());
-		//$to = $row2['EmailAddress'];
-		$to = 'sumita.biswas@gmail.com, info@asiandinnerclub.com';
-		$fname = $row2['FirstName'];
+		$to = $row2['EmailAddress'];
+		//$to = 'sumita.biswas@gmail.com, info@asiandinnerclub.com';
 		$subject = 'Membership to Asian Dinner Club';
 		$mess = "Dear $fname,<br>";
 		$mess .= "<br/>Thank you for contacting Asian Dinner Club. Your request to join us as a member has been successful.<br/>";
@@ -61,7 +62,7 @@ if(isset($_GET['approve']))
 		$headers .= "Content-type: text/html; charset=iso-8859-1 \r\n";
 		$headers .= "From: Asian Dinner Club <info@asiandinnerclub.com> \r\n";
 
-		if(mail($to, $subject, $body, $headers))
+		if(mail($to, $subject, $message, $headers))
 		{?>
 			<script>
 			alert("Thanks - Member '<?php echo $fullname;?> has been approved!");
@@ -124,12 +125,13 @@ if(isset($_POST['Submit']))
 		$errors[] = "The mobile number must be numeric!";
 	}
 
-	$fields = array('Forename', 'Surname', 'Gender', 'Status', 'EmailAddress', 'DOB', 'Profession', 'Mobile', 'DietaryReq', 'Religion', 'Height', 'Drink', 'HeardFrom', 'Interests', 'Achieve');
+	$fields = array('Forename', 'Surname', 'Gender', 'Status', 'EmailAddress', 'DOB', 'Profession', 'Mobile', 'DietaryReq', 'Religion', 'Height', 'Drink', 'HeardFrom', 'Interests', 'Achieve',
+					'Address_Line1', 'Address_Line2', 'Address_Town', 'Address_City', 'Address_County', 'Address_PostCode', 'Address_Country');
 
 	foreach($fields as $field)
 	{
 		$formvar = $_POST[$field];
-		if($formvar == '')
+		if($formvar == '' && $field != 'Address_City')
 		{
 			$errors[] = "You forgot to enter the '$field'";
 		}
@@ -443,6 +445,59 @@ if(isset($_GET['edit']))
 			  	              <textarea name="Interests" cols="20" class="text long" id="usrInterests"><?php if(isset($_POST['Interests'])){echo $_POST['Interests'];}else{ echo $row3['Interests'];}?></textarea>
 			  	            </div>
 			  	          </div>
+						  <div class='rowwrap'>
+				<div class='cell-1'>&nbsp;</div>
+				<div class='cell-2'></div>
+			</div>
+			<div class="rowwrap" style='padding-left:110px;'>
+				Address  <span class="style1">*</span><span class="redasterisk" id="usrAddress_mark" style="display:none;"> *</span>
+			</div>
+			<div class="rowwrap">
+				<div class="cell-1">Line 1</div>
+				<div class="cell-2">
+					<input type="text" size="20" class="text long" name="Address_Line1" value="<?php if(isset($_POST['Address_Line1'])){echo $_POST['Address_Line1'];}else {echo $row3['Address_Line1'];}?>" />
+				</div>
+			</div>
+			<div class="rowwrap">
+				<div class="cell-1">Line 2</div>
+				<div class="cell-2">
+					<input type="text" size="20" class="text long" name="Address_Line2" value="<?php if(isset($_POST['Address_Line2'])){echo $_POST['Address_Line2'];}else {echo $row3['Address_Line2'];}?>" />
+				</div>
+			</div>
+			<div class="rowwrap">
+				<div class="cell-1">Town</div>
+				<div class="cell-2">
+					<input type="text" size="20" class="text long" name="Address_Town" value="<?php if(isset($_POST['Address_Town'])){echo $_POST['Address_Town'];}else {echo $row3['Address_Town'];}?>" />
+				</div>
+			</div>
+			<div class="rowwrap">
+				<div class="cell-1">City (not mandatory)</div>
+				<div class="cell-2">
+					<input type="text" size="20" class="text long" name="Address_City" value="<?php if(isset($_POST['Address_City'])){echo $_POST['Address_City'];}else {echo $row3['Address_City'];}?>" />
+				</div>
+			</div>
+			<div class="rowwrap">
+				<div class="cell-1">County</div>
+				<div class="cell-2">
+					<input type="text" size="20" class="text long" name="Address_County" value="<?php if(isset($_POST['Address_County'])){echo $_POST['Address_County'];}else {echo $row3['Address_County'];}?>" />
+				</div>
+			</div>
+			<div class="rowwrap">
+				<div class="cell-1">Post Code</div>
+				<div class="cell-2">
+					<input type="text" size="20" class="text long" name="Address_PostCode" value="<?php if(isset($_POST['Address_PostCode'])){echo $_POST['Address_PostCode'];}else {echo $row3['Address_PostCode'];}?>" />
+				</div>
+			</div>
+			<div class="rowwrap">
+				<div class="cell-1">Country</div>
+				<div class="cell-2">
+					<input type="text" size="20" class="text long" name="Address_Country" value="<?php if(isset($_POST['Address_Country'])){echo $_POST['Address_Country'];}else {echo $row3['Address_Country'];}?>" />
+				</div>
+			</div>
+			<div class='rowwrap'>
+				<div class='cell-1'>&nbsp;</div>
+				<div class='cell-2'></div>
+			</div>
 			  	          <div class="rowwrap">
 						  		              <div class="cell-1">What do you hope to achieve from Asian Dinner Club? <span class="style1">*</span><span class="redasterisk" id="usrAchieve_mark" style="display:none;"> *</span></div>
 						  		              <div class="cell-2">

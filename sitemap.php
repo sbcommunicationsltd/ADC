@@ -55,9 +55,6 @@
           <!--<ul>
 		    <li><a href="premiermembership.php" target="_self">Premier Membership</a>
           </ul>-->
-		  <ul>
-			<li><a href="londondinnerclub.php" target="_self">London Dinner Club</a></li>
-          </ul>
 		  <!--<ul>
 			<li><a href="matchmaking.php" target="_self">Match Making</a>
 		  </ul>-->
