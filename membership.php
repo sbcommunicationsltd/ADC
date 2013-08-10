@@ -280,14 +280,24 @@ include 'database/databaseconnect.php';
 				}
 				$query2 .= "'$date', 'No')";
 				$headers = "From: Asian Dinner Club <info@asiandinnerclub.com> \r\n";
+				$errormessage = "<p><b>System Error</b></p><p>A system error has occurred. We apologise for the inconvenience. Please try again soon.</p>";
 				if(mail($to, $subject, $body, $headers))
 				{
-					echo '<p><b>Thank You!</b></p><p>We will contact you within 48hrs to discuss your membership application.</p><p><hr/></p>';
 					$result2 = mysql_query($query2) or die(mysql_error());
+					if ($result2) {
+						echo "<p>Thanks very much for your interest in becoming a member of the Asian Dinner Club. If successful, we will be in touch as soon as possible with your membership details.</p>";
+						echo "<p>&nbsp;</p><p>Thanks,<br/><br/>From the Asian Dinner Club Team</p>";
+						echo "<p><img src='http://www.asiandinnerclub.com/images/logo.gif' alt='Asian Dinner Club' border='0' /></p>";
+						echo "<p>&nbsp;<p><p>&nbsp;</p><p><hr/></p><p style='font-size:9px; color:grey;'>Asian Connections Ltd | Registered Office: 145-157 St John Street, London, EC1V 4PW | Reg. in England &amp; Wales | Co No: 8595159</p><p><hr/></p><p>&nbsp;</p><p>&nbsp;</p>";
+					} else {
+						echo $errormessage;
+						unlink('member/images/' . $imagefile);
+					}
 				}
 				else
 				{
-					echo '<p><b>System Error</b></p><p>A system error has occurred. We apologise for the inconvenience. Please try again soon.</p>';
+					echo $errormessage;
+					unlink('member/images/' . $imagefile);
 				}
 			}
 			else
@@ -311,8 +321,7 @@ include 'database/databaseconnect.php';
 					}
 					echo '</p><p>Please try again.</p><p><br /></p>';
 			} // End of if (empty($errors)) IF.
-		}
-		?>
+		}?>
 
 	    <p><span class="righthandpic"><img src="images/asian_dinner_3.jpg" alt="Asian Dinner Club Membership" width="150" height="150" /></span></p>
 		<p>To be considered for Membership to the Asian Dinner Club, please complete the form below. </p>
