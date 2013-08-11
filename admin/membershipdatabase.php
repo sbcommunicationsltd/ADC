@@ -5,6 +5,41 @@ if(!isset($_SESSION['admin_is_logged_in'])){
 	header('Location: login.php');
 }
 
+function DetermineAgeFromDOB($YYYYMMDD_In)
+{
+  // Parse Birthday Input Into Local Variables
+  // Assumes Input In Form: YYYYMMDD
+  $yIn = substr($YYYYMMDD_In, 0, 4);
+  $mIn = substr($YYYYMMDD_In, 4, 2);
+  $dIn = substr($YYYYMMDD_In, 6, 2);
+
+  // Calculate Differences Between Birthday And Now
+  // By Subtracting Birthday From Current Date
+  $ddiff = date("d") - $dIn;
+  $mdiff = date("m") - $mIn;
+  $ydiff = date("Y") - $yIn;
+
+  // Check If Birthday Month Has Been Reached
+  if($mdiff < 0)
+  {
+	// Birthday Month Not Reached
+	// Subtract 1 Year From Age
+	$ydiff--;
+  }
+  elseif($mdiff==0)
+  {
+	// Birthday Month Currently
+	// Check If BirthdayDay Passed
+	if($ddiff < 0)
+	{
+	  //Birthday Not Reached
+	  // Subtract 1 Year From Age
+	  $ydiff--;
+	}
+  }
+  return $ydiff;
+}
+
 if(isset($_POST['export']))
 {
 	$qu = "SELECT * FROM Members ORDER BY ID ASC";
@@ -18,6 +53,7 @@ if(isset($_POST['export']))
 		$fields = mysql_field_name($re, $i);
 		$output .= $fields . "\t ";
 	}
+	$output .= "Age\t ";
 	$output .= "\n";
 
 	while ($rowr = mysql_fetch_array($re))
@@ -26,6 +62,10 @@ if(isset($_POST['export']))
 		{
 			$output .= $rowr[$j]."\t ";
 		}
+		$dob = explode('/', $rowr['DOB']);
+		$dobformat = $dob[2] . $dob[1] . $dob[0];
+		$age = DetermineAgeFromDOB($dobformat);
+		$output .= "$age\t ";
 		$output .= "\n";
 	}
 
@@ -118,13 +158,12 @@ $total = $male + $female;?>
 </table>
 <p>&nbsp;</p>
 
-<!--<p><form method="post"><input type="submit" name="export" value="Export Membership Table" onclick="if(confirm('Are you sure you want to export this data?')){<?php $_POST['export'];?>}else{window.location.reload(false);}" /></form></p>-->
 <form method='post' name='Export'>
 <input type='hidden' name='export' />
 <table cellspacing='0' cellpadding='0' border='0'>
 	<tr>
 		<td><img src="../images/sumi_buttons_04.png" width="11" height="19" alt=""></td>
-		<td class='singlebutton'><a title='Export' onclick="if(confirm('Are you sure you want to export this data?')){document.Export.submit();}else{window.location.reload(false);}" href='#'>Export Membership Table</a></td>
+		<td class='singlebutton'><a title='Export' onclick="if(confirm('Are you sure you want to export this data?')){document.Export.submit();}else{window.location.reload(false);}">Export Membership Table</a></td>
 		<td><img src="../images/sumi_buttons_06.png" width="11" height="19" alt=""></td>
 	</tr>
 </table>

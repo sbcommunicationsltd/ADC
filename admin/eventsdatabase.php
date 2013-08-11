@@ -133,16 +133,20 @@ if(isset($_POST['submitedit']))
 		$errors[] = 'The date provided is in the past';
 	}
 
-	if ($_POST['AgeMin'] == '35+' || $_POST['AgeMin'] == '30+') {
-        $_POST['Age'] = $_POST['AgeMin'];
+	if ($_POST['AgeMax'] == '+') {
+		if ($_POST['AgeMin'] == '') {
+			$_POST['Age'] = '';
+		} else {
+			$_POST['Age'] = $_POST['AgeMin'] . '+';
+		}
     } else {
         if($_POST['AgeMax'] < $_POST['AgeMin'])
         {
             $errors[] = 'The Maximum Age is younger than the Minumum Age!';
         }
-        elseif($_POST['AgeMin']=="" || $_POST['AgeMax']=="")
+        elseif($_POST['AgeMin']=="")
         {
-            $_POST['Age'] == "";
+            $_POST['Age'] = "";
         }
         else
         {
@@ -154,7 +158,6 @@ if(isset($_POST['submitedit']))
 	{
 		$errors[] = "The Max Male Quantity is not numeric.";
 	}
-
 
 	if(!is_numeric($_POST['MaxFemaleQuantity']))
 	{
@@ -317,14 +320,14 @@ if(isset($_GET['edit']))
 	$datemonth = $arrdate[1];
 	$dateyear = $arrdate[0];
 	$age = $row2['Age'];
-	if ($age != '35+' && $age != '30+') {
+	if (strpos($age, '+') === false) {
         $arrage = split(' - ', $age);
         $agemin = $arrage[0];
         $agemax = $arrage[1];
     } else {
-        $agemin = $age;
-    }
-	?>
+        $agemin = substr($age, 0, -1);
+		$agemax = '+';
+    }?>
 
 	<form method='post' name='editevent' enctype="multipart/form-data">
 	<table width='600' align='center' style="border:1px solid #d0d3d5; background-color:transparent;" cellspacing='2' cellpadding='2'>
@@ -420,14 +423,11 @@ if(isset($_GET['edit']))
 			<th align='left'>Age</th>
 			<td><select name="AgeMin" id='AgeMin' onChange="show('AgeMin', 'AgeMax');"><option value="">Min</option>
 				<?php
-                $display = 'inline';
 				for($min=24; $min<=42; $min++)
 				{
 					echo "<option value='$min'"; if(isset($_POST['AgeMin'])){if($_POST['AgeMin'] == $min){echo "selected='selected'";}}else{if($agemin==$min) {echo "selected='selected'";}} echo ">$min</option>";
 				}?>
-                <option value='30+' <?php if(isset($_POST['AgeMin'])){if($_POST['AgeMin'] == '30+'){echo "selected='selected'"; $display = 'none';}}else{if($agemin=='30+'){echo "selected='selected'"; $display = 'none';}}?>>30+</option>
-                <option value='35+' <?php if(isset($_POST['AgeMin'])){if($_POST['AgeMin'] == '35+'){echo "selected='selected'"; $display = 'none';}}else{if($agemin=='35+'){echo "selected='selected'"; $display = 'none';}}?>>35+</option>
-				</select> - <select name='AgeMax' id='AgeMax' style='display:<?php echo $display;?>;'><option value="">Max</option>
+				</select> - <select name='AgeMax' id='AgeMax'><option value="+" <?php if(isset($_POST['AgeMax'])){if('+' == $_POST['AgeMax']) {echo "selected='seleted'";}}else {if($agemax == '+') {echo "selected='selected'";}}?>>Max</option>
 				<?php
 				for($max=24; $max<=42; $max++)
 				{
@@ -584,16 +584,20 @@ if(isset($_POST['submitadd']))
 		$errors[] = 'The date provided is in the past!';
 	}
     
-    if ($_POST['AgeMin'] == '35+' || $_POST['AgeMin'] == '30+') {
-        $_POST['Age'] = $_POST['AgeMin'];
+    if ($_POST['AgeMax'] == '+') {
+        if ($_POST['AgeMin'] == '') {
+			$_POST['Age'] = '';
+		} else {
+			$_POST['Age'] = $_POST['AgeMin'] . '+';
+		}
     } else {
         if($_POST['AgeMax'] < $_POST['AgeMin'])
         {
             $errors[] = 'The Maximum Age is younger than the Minumum Age!';
         }
-        elseif($_POST['AgeMin']=="" || $_POST['AgeMax']=="")
+        elseif($_POST['AgeMin']=="")
         {
-            $_POST['Age'] == "";
+            $_POST['Age'] = "";
         }
         else
         {
@@ -851,14 +855,11 @@ if(isset($_GET['add']))
 				<th align='left'>Age</th>
 				<td><select name="AgeMin" id='AgeMin' onChange="show('AgeMin', 'AgeMax');"><option value="">Min</option>
 					<?php
-                    $display = 'inline';
 					for($min=24; $min<=42; $min++)
 					{
 						echo "<option value='$min' "; if($min == $_POST['AgeMin']){echo "selected='selected'";} echo ">$min</option>";
 					}?>
-                    <option value='30+' <?php if('30+' == $_POST['AgeMin']){echo "selected='selected'"; $display = 'none';}?>>30+</option>
-                    <option value='35+' <?php if('35+' == $_POST['AgeMin']){echo "selected='selected'"; $display = 'none';}?>>35+</option>
-					</select> - <select name='AgeMax' id='AgeMax' style="display:<?php echo $display;?>;"><option value="">Max</option>
+					</select> - <select name='AgeMax' id='AgeMax'><option value="+" <?php if ('+' == $_POST['AgeMax']){echo "selected='selected'";}?>>Max</option>
 					<?php
 					for($max=24; $max<=42; $max++)
 					{
