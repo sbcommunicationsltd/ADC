@@ -398,11 +398,11 @@ text-decoration:none;
 #navigation ul li { margin:0px; padding:0px; float:left;}
 #navigation li { 	background:url(../images/topnav.gif) repeat-y right 88%; /*image not found - sb*/
 padding:15px 0px 0px 0px; display:inline; float:left;}
-#navigation ul li a,ul.nav li a:link,ul.nav li a:visited,ul.nav li a:active { margin:0px; padding:8px 22px 2px 30px; color:#FFFFFF; height:11px; text-decoration:none; float:left; font-size:11px;}
-#navigation ul li a:hover { margin:0px; padding:8px 22px 2px 30px; color:#ec008c; height:15px; text-decoration:none; float:left; font-size:11px;}
+#navigation ul li a,ul.nav li a:link,ul.nav li a:visited,ul.nav li a:active { margin:0px; padding:8px 40px 2px 30px; color:#FFFFFF; height:11px; text-decoration:none; float:left; font-size:11px;}
+#navigation ul li a:hover { margin:0px; padding:8px 40px 2px 30px; color:#ec008c; height:15px; text-decoration:none; float:left; font-size:11px;}
 #navigation ul li a.active {
 	margin:0px;
-	padding:8px 22px 2px 30px; /*top right bottom left (change both to 15 for premier membership)*/
+	padding:8px 40px 2px 30px; /*top right bottom left (change both to 15 for premier membership)*/
 	color:#ec008c;
 	height:15px;
 	text-decoration:none;

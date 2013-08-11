@@ -46,6 +46,16 @@ function reload(gen, loc)
 	self.location = loc + '&gen=' + val2 ;
 }
 </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43079962-1', 'asiandinnerclub.com');
+  ga('send', 'pageview');
+
+</script>
 </head>
 <body>
 <div id="wrapper">
@@ -58,11 +68,7 @@ function reload(gen, loc)
 <li><a class="active" href="../events.php" target="_self">CURRENT<br/>EVENTS</a></li>
 <li><a href="../past_events.php" target="_self">PAST<br/>EVENTS</a></li>
 <li><a href="../membership.php" target="_self">MEMBERSHIP</a></li>
-<!--<li><a href="../premiermembership.php" target="_self">PREMIER<br/>MEMBERSHIP</a></li>-->
-<!--<li><a href="../matchmaking.php" target="_self">MATCH&nbsp;<sup style='color:white; font-size:8px; border:1px solid white; padding:1px;'>NEW</sup><br/><span style='padding-right:25px;'>MAKING</span></a></li>-->
 <li><a href="../press.php" target="_self">PRESS</a></li>
-<!--<li><a href="eternitymembership.php" target="_self">ETERNITY&nbsp;<sup style='color:white; font-size:8px; border:1px solid white; padding:1px;'>NEW</sup><br/><span style='padding-right:25px;'>MEMBERSHIP</span></a></li>-->
-<li><a href="../team.php" target="_self">THE<br/>TEAM</a></li>
 <li><a href="../contact.php" target="_self">CONTACT</a></li>
 </ul>
 </div>
@@ -330,12 +336,6 @@ $row = mysql_fetch_array($result);?>
 <div class="footer2col2">Copyright &copy;&nbsp;Asian Dinner Club&nbsp;2009</div>
 <div class="footer2col2">designed by: <a href="http://www.streeten.co.uk" target='_blank'>streeten</a></div>
 <div class="footer2col2">redeveloped by: <a href="http://www.sbcommunications.co.uk" target='_blank'>S B Communications Ltd.</a></div></div>
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-</script>
-<script type="text/javascript">
-  _uacct = "UA-4965994-1";
-  urchinTracker();
-</script>
 </div>
 </body>
 </html>
