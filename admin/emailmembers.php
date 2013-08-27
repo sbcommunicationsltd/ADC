@@ -115,6 +115,7 @@ if(!isset($_POST['Send']) || (isset($_POST['Send']) && !empty($failed)))
 			{
 				$emails[] = $row[0] . '#' . $row[1];
 			}
+			//$emails = array('Sumita#sumita.biswas@gmail.com', 'Sumi#sumi@blueyonder.co.uk', 'SumiHotMail#sumita_biswas@hotmail.com', 'TestMail#info@asiandinnerclub.com');
 			$emailsadd = serialize($emails);?>
 			<form method='post' name='send'>
 				<table width='100%' cellspacing='2' cellpadding='2' border='0'>
@@ -183,7 +184,6 @@ else
 {
 	$failed = array();
 	$toemails = unserialize($_POST['EmailAdd']);
-	//$toemails = array('Sumita#sumita.biswas@gmail.com', 'Sumi#sumi@blueyonder.co.uk', 'SumiHotMail#sumita_biswas@hotmail.com', 'TestMail#info@asiandinnerclub.com');
 	foreach($toemails as $toe)
 	{
 		$toemail = explode('#', $toe);
@@ -240,6 +240,7 @@ else
 	if(empty($failed))
 	{?>
 		<p>All Email(s) have been sent successfully!</p>
+		<p>Total Sent: <?php echo count($toemails);?></p>
 		<p>&nbsp;</p>
 		<p>
 		<table cellspacing='0' cellpadding='0' border='0'>
@@ -253,8 +254,10 @@ else
 <?php
 	}
 	else
-	{?>
+	{
+		$totalsent = count($toemails) - count($failed);?>
 		<p>Sorry, a few emails couldn't be sent.</p>
+		<p>Total Number Successfully Sent: <?php echo $totalsent;?></p>
 		<p>There is a temporary error in the system. We apologise for any inconvenience caused.</p>
 		<p>Please try again later or email manually by clicking the recipient(s) below:</p>
 		<p>
