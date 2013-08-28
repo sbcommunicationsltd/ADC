@@ -235,6 +235,7 @@ else
 		{
 			$failed[] = $toe;
 		}
+		sleep(2);
 	}
 
 	if(empty($failed))
